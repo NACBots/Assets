@@ -1,1 +1,171 @@
-*{padding: 0px;margin: 0px;font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;box-sizing: border-box}html{height: 100%;overflow: hidden}body{width: 100vw;height: 100%;padding: 0px;margin: 0px;perspective: 1px;transform-style: preserve-3d;overflow-x: hidden;overflow-y: scroll}.parallex{position: relative;height: 100vh;width: 100vw;box-sizing: border-box;transform-style: inherit;padding: 2vh 4vw;display: flex;align-items: center;justify-content: center}.parallex .parallexOne::before,.parallex .parallexTwo::before{background: 50% 50% / contain}.parallexOne::before,.parallexTwo::before{position: absolute;content: "";top: 0;bottom: 0;right: 0;left: 0;min-height: 100vh;display: block;background-image: var(--poster-url);background-size: cover;background-attachment: scroll;transform: translateZ(-1px) scale(2);z-index: -1}.parallexTwo::before{background-image: var(--poster-url)}.about{position: relative;min-height: 100vh;width: 100vw;padding: 100px 30vw 50px 15vw;background-color: var(--secondary-color);z-index: 1000}.about h1,.about p{width: 100%;display: block;color: var(--lyrics-color);font-size: 7.4rem;font-weight: 700;text-transform: uppercase;margin: 10px;letter-spacing: 0.2em;text-align: left;opacity: 0.8}.about p{font-size: 1.85em;text-justify: distribute-all-lines;line-height: 2.5;margin: 20px 0px 0px 15px}.main-content{position: fixed;border: 10px solid var(--white-color);display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5vh 5vw;max-width: 90vw}.main-content p{color: var(--white-color);font-size: 0.7em;letter-spacing: 0.55em;margin: 10px 0px 0px 15px}h1{width: 100%;color: var(--white-color);font-size: 3.2rem;font-weight: 700;margin: 10px;letter-spacing: 0.2em;line-height: 2;text-align: center;opacity: 0.8}small{font-size: 1.5rem}@media (max-width: 767px){.main-content{padding: 3vh 3vw;max-width: 80vw}h1{font-size: 1.5rem}small{font-size: 1rem}.about h1{font-size: 1.8rem}.about p{font-size: 0.65rem}}@media (max-width: 400px){.about p{font-size: 0.55rem}}
+:root {
+    /* Your Image */
+    --bg-image: url('https://images.unsplash.com/photo-1754481249380-3b4ada5ebc67?q=80&w=1200&auto=format&fit=crop');
+    
+    --glass-color: rgba(0, 0, 0, 0.5);
+    --text-color: #ffffff;
+    --accent: #ff4757;
+}
+
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-color);
+    background: #000; /* Fallback black */
+    overflow: hidden; 
+}
+
+/* --- 1. THE FIXED BACKGROUND (ZOOM PARALLAX) --- */
+.parallax-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transform-origin: center center;
+    will-change: transform, filter;
+}
+
+/* Overlay */
+.parallax-layer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+/* --- 2. SCROLL CONTAINER --- */
+.scroll-container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    perspective: 1px;
+}
+
+/* --- HERO --- */
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 15vw;
+    font-weight: 800;
+    line-height: 0.8;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.4);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* --- LYRICS SECTION --- */
+.content-section {
+    min-height: 100vh;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+/* Sticky Header */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.85); /* Darker header for contrast */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.track-info h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70vw;
+}
+
+.track-info span {
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Lyrics Card */
+.lyrics-card {
+    background: var(--glass-color);
+    backdrop-filter: blur(8px); /* Subtle blur on the card itself */
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin: 30px 15px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.lyrics-text {
+    font-size: 1.35rem;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Animations */
+.animate-up {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
+@keyframes eq { 
+    0% { height: 30%; } 
+    50% { height: 100%; } 
+    100% { height: 30%; } 
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
